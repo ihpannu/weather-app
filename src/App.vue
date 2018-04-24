@@ -6,7 +6,7 @@
 
 <style lang="scss">
 body {
-  background: #2c3e50;
+  background-image: linear-gradient(to bottom, #00c6fb 0%, #005bea 100%);
   height: 100vh;
   display: flex;
   justify-content: center;

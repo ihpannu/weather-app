@@ -21,8 +21,15 @@
                 <!-- <i class="wi" :class="[classWI]"></i> {{ curTempDisplay }} -->
                 <!-- <span class="btn btn-deg" :class="{ 'btn-deactivate': displayMode }" @click="getTemp(0)">°C</span> | -->
               </h1>
-                <span class="info-text">°F</span>
+                <span class="fah">°</span>
+                <span class="fah">F</span>
+
                 <div class="weather-info">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                          <span></span>
                   <span class="info-text">Clear Skies</span>
                   <span class="info-text">52% Humidity</span>
                 </div>
@@ -94,6 +101,31 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+// Variables
+$white: #f5f4f5;
+$lightBorderDark: rgba(0, 0, 0, 0.1);
+$lightBorderWhite: rgba(255, 255, 255, 0.4);
+
+// Multiple Style
+
+input,
+button,
+.section-one {
+  background: transparent;
+  color: $white;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  i {
+    color: #373f4a;
+  }
+  ::placeholder {
+    color: $white;
+  }
+}
+
+h1 {
+  font-size: 8em;
+}
 section {
   display: flex;
   justify-content: center;
@@ -115,7 +147,7 @@ section {
 hr {
   border: none;
   height: 1px;
-  background: rgba(0, 0, 0, 0.1);
+  background: $lightBorderDark;
 }
 
 button {
@@ -129,9 +161,13 @@ button {
 
 input {
   border: none;
-  padding: 0.3rem 1.5rem;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 1px solid $lightBorderDark;
+  transition: border 200ms ease-in;
   &:focus {
     outline: none;
+    border-bottom: 1px solid $lightBorderWhite;
   }
   &:active {
     border: none;
@@ -148,8 +184,10 @@ input {
 }
 
 .section-one {
-  background: #367cd6;
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
+  .fah {
+    font-size: 2.5rem;
+  }
   span {
     font-size: 1.3rem;
     margin: 0.3rem 0;
@@ -157,22 +195,22 @@ input {
 }
 
 .section-two {
-  padding: 2rem;
+  background: $white;
+  padding: 1rem 3rem;
   display: flex;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   div {
-    padding: 0.4rem 0.7rem;
-    font-size: 1rem;
+    padding: 0.4rem 1rem;
+    font-size: 1.5rem;
+    li {
+      padding: 0.2rem 0.5rem;
+    }
   }
   .line {
     border: none;
-    background: rgba(0, 0, 0, 0.1);
+    background: $lightBorderDark;
     width: 1px;
     margin: 0.2rem 0;
   }
-}
-
-h1 {
-  font-size: 6rem;
 }
 </style>
