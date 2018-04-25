@@ -7,8 +7,8 @@
             <button @click="searchByCity">
               <i class="fas fa-search"></i>
             </button>
-            <input class="input" placeholder="Search" type="text">
-            <button>
+            <input v-model="city" class="input" placeholder="Search" type="text">
+            <button @click="clearSearch">
               <i class="fas fa-times"></i>
             </button>
             <hr>
@@ -95,7 +95,7 @@ export default {
 
   data() {
     return {
-      city: 'seattle',
+      city: '',
       temprature: '',
       description: '',
       humidity: '',
@@ -107,14 +107,19 @@ export default {
   },
 
   methods: {
+    clearSearch() {
+      this.city = ''
+    },
     searchByCity() {
       // const data = res.data
       axios
-        .get(`${this.weatherUrl}q=${this.city}&appid=${this.key}`)
+        .get(
+          `${this.weatherUrl}q=${this.city}&units=imperial&appid=${this.key}`
+        )
         .then(
           res => (
             (this.description = res.data.list[0].weather[0].description),
-            ((this.temprature = res.data.list[0].main.temp),
+            ((this.temprature = parseInt(res.data.list[0].main.temp)),
             (this.humidity = res.data.list[0].main.humidity))
           )
         )
