@@ -37,8 +37,17 @@
           </div>
         </div>
 
-        <div class="section-two">
+        <div  class="section-two">
           <div>
+            <li v-for="day in daily" :key="day.dt">{{day.weather[0].description}}</li>
+            <!-- <li>
+              <i class="fas fa-sun"></i>
+            </li>
+            <li>13</li>
+            <li>-2</li> -->
+          </div>
+          <!-- <span class="line"></span> -->
+          <!-- <div>
             <li>Jan 5</li>
             <li>
               <i class="fas fa-sun"></i>
@@ -72,16 +81,7 @@
             </li>
             <li>13</li>
             <li>-2</li>
-          </div>
-          <span class="line"></span>
-          <div>
-            <li>Jan 5</li>
-            <li>
-              <i class="fas fa-sun"></i>
-            </li>
-            <li>13</li>
-            <li>-2</li>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>
@@ -99,14 +99,15 @@ export default {
       temprature: '',
       description: '',
       humidity: '',
+      daily: [],
       key: '6a5a99aa870b51c7bcc6dd4e890dc690',
       lang: 'en',
-      weatherUrl: 'api.openweathermap.org/data/2.5/forecast?',
+      weatherUrl: 'http://api.openweathermap.org/data/2.5/forecast?',
       weatherIconUrl: 'http://openweathermap.org/img/w/',
       showDiv: false
     }
   },
-
+  created() {},
   methods: {
     clearSearch() {
       this.city = ''
@@ -119,14 +120,15 @@ export default {
             this.key
           }`
         )
-
         .then(
-          res => (this.description = res.data.list[0].weather[0].description),
-          ((this.temprature = parseInt(res.data.list[0].main.temp)),
-          (this.humidity = res.data.list[0].main.humidity)),
-          console.log(res.data)
+          res => (
+            (this.description = res.data.list[0].weather[0].description),
+            ((this.temprature = parseInt(res.data.list[0].main.temp)),
+            (this.humidity = res.data.list[0].main.humidity)),
+            (this.daily = res.data.list.map(day => day)),
+            console.log(res.data)
+          )
         )
-
         .catch(err => console.error(err.message))
     }
   }
