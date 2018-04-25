@@ -4,17 +4,17 @@
       <div class="container">
         <div class="section-one">
           <div class="searchbox">
-            <button @click="searchByCity">
+            <button   @click="searchByCity">
               <i class="fas fa-search"></i>
             </button>
-            <input v-model="city" class="input" placeholder="Search" type="text">
+            <input v-on:keyup.enter="searchByCity" v-model="city" class="input" placeholder="Search" type="text">
             <button @click="clearSearch">
               <i class="fas fa-times"></i>
             </button>
             <hr>
           </div>
           <div>
-            <div style="display: flex; justify-content: center; align-content: center;">
+            <div  style="display: flex; justify-content: center; align-content: center;">
               <h1>
                 <!-- <h1 v-show="curTempDisplay"> -->
                 {{ temprature }}
@@ -24,7 +24,7 @@
                 <span class="fah">°</span>
                 <span class="fah">F</span>
 
-                <div class="weather-info">
+                <div   class="weather-info">
                           <span></span>
                           <span></span>
                           <span></span>
@@ -102,10 +102,22 @@ export default {
       key: '6a5a99aa870b51c7bcc6dd4e890dc690',
       lang: 'en',
       weatherUrl: 'http://api.openweathermap.org/data/2.5/forecast?',
-      weatherIconUrl: 'http://openweathermap.org/img/w/'
+      weatherIconUrl: 'http://openweathermap.org/img/w/',
+      showDiv: false
     }
   },
-
+  // created() {
+  //   axios
+  //     .get(`${this.weatherUrl}q=seattle&units=imperial&appid=${this.key}`)
+  //     .then(
+  //       res => (
+  //         (this.description = res.data.list[0].weather[0].description),
+  //         ((this.temprature = parseInt(res.data.list[0].main.temp)),
+  //         (this.humidity = res.data.list[0].main.humidity))
+  //       )
+  //     )
+  //     .catch(err => console.error(err.message))
+  // },
   methods: {
     clearSearch() {
       this.city = ''
@@ -123,7 +135,7 @@ export default {
             (this.humidity = res.data.list[0].main.humidity))
           )
         )
-      // .then(res => data.list)
+        .catch(err => console.error(err.message))
     }
   }
 }
