@@ -40,7 +40,7 @@
             <div class="section-two">
                 <div v-for="day in daily" :key="day.dt" >
                   <div>
-                    <li >{{day.dt_txt}}</li>
+                    <li > {{day.dt_txt}} </li>
                     <li style="font-weight: bold;">{{parseInt(day.main.temp)}}</li>
                     <li>{{parseInt(day.main.humidity)}}</li>
                   </div>
