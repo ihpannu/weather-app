@@ -101,23 +101,12 @@ export default {
       humidity: '',
       key: '6a5a99aa870b51c7bcc6dd4e890dc690',
       lang: 'en',
-      weatherUrl: 'http://api.openweathermap.org/data/2.5/forecast?',
+      weatherUrl: 'api.openweathermap.org/data/2.5/forecast?',
       weatherIconUrl: 'http://openweathermap.org/img/w/',
       showDiv: false
     }
   },
-  // created() {
-  //   axios
-  //     .get(`${this.weatherUrl}q=seattle&units=imperial&appid=${this.key}`)
-  //     .then(
-  //       res => (
-  //         (this.description = res.data.list[0].weather[0].description),
-  //         ((this.temprature = parseInt(res.data.list[0].main.temp)),
-  //         (this.humidity = res.data.list[0].main.humidity))
-  //       )
-  //     )
-  //     .catch(err => console.error(err.message))
-  // },
+
   methods: {
     clearSearch() {
       this.city = ''
@@ -126,15 +115,18 @@ export default {
       // const data = res.data
       axios
         .get(
-          `${this.weatherUrl}q=${this.city}&units=imperial&appid=${this.key}`
+          `${this.weatherUrl}q=${this.city}&units=imperial&cnt=5&appid=${
+            this.key
+          }`
         )
+
         .then(
-          res => (
-            (this.description = res.data.list[0].weather[0].description),
-            ((this.temprature = parseInt(res.data.list[0].main.temp)),
-            (this.humidity = res.data.list[0].main.humidity))
-          )
+          res => (this.description = res.data.list[0].weather[0].description),
+          ((this.temprature = parseInt(res.data.list[0].main.temp)),
+          (this.humidity = res.data.list[0].main.humidity)),
+          console.log(res.data)
         )
+
         .catch(err => console.error(err.message))
     }
   }
