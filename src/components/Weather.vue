@@ -24,7 +24,7 @@
                 <span class="fah">°</span>
                 <span class="fah">F</span>
 
-                <div   class="weather-info">
+                <div class="weather-info">
                           <span></span>
                           <span></span>
                           <span></span>
@@ -36,60 +36,28 @@
             </div>
           </div>
         </div>
+      <div>
+            <div class="section-two">
+                <div v-for="day in daily" :key="day.dt" >
+                  <div>
+                    <li >{{day.dt_txt}}</li>
+                    <li style="font-weight: bold;">{{parseInt(day.main.temp)}}</li>
+                    <li>{{parseInt(day.main.humidity)}}</li>
+                  </div>
+                  <span class="line"></span>
+                </div>
 
-        <div  class="section-two">
-          <div>
-            <li v-for="day in daily" :key="day.dt">{{day.weather[0].description}}</li>
-            <!-- <li>
-              <i class="fas fa-sun"></i>
-            </li>
-            <li>13</li>
-            <li>-2</li> -->
-          </div>
-          <!-- <span class="line"></span> -->
-          <!-- <div>
-            <li>Jan 5</li>
-            <li>
-              <i class="fas fa-sun"></i>
-            </li>
-            <li>13</li>
-            <li>-2</li>
-          </div>
-          <span class="line"></span>
-          <div>
-            <li>Jan 5</li>
-            <li>
-              <i class="fas fa-sun"></i>
-            </li>
-            <li>13</li>
-            <li>-2</li>
-          </div>
-          <span class="line"></span>
-          <div>
-            <li>Jan 5</li>
-            <li>
-              <i class="fas fa-sun"></i>
-            </li>
-            <li>13</li>
-            <li>-2</li>
-          </div>
-          <span class="line"></span>
-          <div>
-            <li>Jan 5</li>
-            <li>
-              <i class="fas fa-sun"></i>
-            </li>
-            <li>13</li>
-            <li>-2</li>
-          </div> -->
-        </div>
+              </div>
+            </div>
       </div>
+
     </section>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
 export default {
   name: 'Weather',
 
@@ -234,6 +202,7 @@ input {
   background: $white;
   padding: 1rem 3rem;
   display: flex;
+  flex-direction: row;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   div {
     padding: 0.4rem 1rem;
