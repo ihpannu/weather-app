@@ -4,10 +4,10 @@
       <div class="container">
         <div class="section-one">
           <div class="searchbox">
-            <button>
+            <button @click="searchByCity">
               <i class="fas fa-search"></i>
             </button>
-            <input v-model="isFocus" class="input" placeholder="Search" type="text">
+            <input class="input" placeholder="Search" type="text">
             <button>
               <i class="fas fa-times"></i>
             </button>
@@ -17,7 +17,7 @@
             <div style="display: flex; justify-content: center; align-content: center;">
               <h1>
                 <!-- <h1 v-show="curTempDisplay"> -->
-                {{ 13 }}
+                {{ temprature }}
                 <!-- <i class="wi" :class="[classWI]"></i> {{ curTempDisplay }} -->
                 <!-- <span class="btn btn-deg" :class="{ 'btn-deactivate': displayMode }" @click="getTemp(0)">°C</span> | -->
               </h1>
@@ -30,8 +30,8 @@
                           <span></span>
                           <span></span>
                           <span></span>
-                  <span class="info-text">Clear Skies</span>
-                  <span class="info-text">52% Humidity</span>
+                  <span class="info-text">{{description}}</span>
+                  <span class="info-text">{{humidity}}% Humidity</span>
                 </div>
             </div>
           </div>
@@ -89,13 +89,38 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Weather',
 
   data() {
-    return {}
+    return {
+      city: 'seattle',
+      temprature: '',
+      description: '',
+      humidity: '',
+      key: '6a5a99aa870b51c7bcc6dd4e890dc690',
+      lang: 'en',
+      weatherUrl: 'http://api.openweathermap.org/data/2.5/forecast?',
+      weatherIconUrl: 'http://openweathermap.org/img/w/'
+    }
   },
-  methods: {}
+
+  methods: {
+    searchByCity() {
+      // const data = res.data
+      axios
+        .get(`${this.weatherUrl}q=${this.city}&appid=${this.key}`)
+        .then(
+          res => (
+            (this.description = res.data.list[0].weather[0].description),
+            ((this.temprature = res.data.list[0].main.temp),
+            (this.humidity = res.data.list[0].main.humidity))
+          )
+        )
+      // .then(res => data.list)
+    }
+  }
 }
 </script>
 
